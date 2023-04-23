@@ -2,18 +2,17 @@ while True:
     choice = input("Type add, show, edit, complete or exit: ")
     choice = choice.strip()
 
-    if "add" in choice or "new" in choice:
+    if choice.startswith("add") or choice.startswith("new"):
         todo = choice[4:]
         with open("todos.txt", "r") as file:
             todos = file.readlines()
 
-        todos.append(todo)
+        todos.append(todo + "\n")
 
         with open("todos.txt", "w", encoding="utf-8") as file:
             file.writelines(todos)
-            file.writelines("\n")
 
-    elif "show" in choice:
+    elif choice.startswith("show"):
         with open("todos.txt", "r") as file:
             todos = file.readlines()
 
@@ -21,35 +20,45 @@ while True:
             item = item.strip("\n")
             print(f"{index}-{item}")
 
-    elif "edit" in choice:
-        number = int(choice[5:])
-        number -= 1
+    elif choice.startswith("edit"):
+        try:
+            number = int(choice[5:])
+            number -= 1
 
-        with open("todos.txt", "r") as file:
-            todos = file.readlines()
+            with open("todos.txt", "r") as file:
+                todos = file.readlines()
 
-        new_todos = input("Enter new todo: ")
-        todos[number] = new_todos + "\n"
+            new_todos = input("Enter new todo: ")
+            todos[number] = new_todos + "\n"
 
-        with open("todos.txt", "w", encoding="utf-8") as file:
-            file.writelines(todos)
+            with open("todos.txt", "w", encoding="utf-8") as file:
+                file.writelines(todos)
 
-    elif "complete" in choice:
-        number = int(choice[9:])
+        except ValueError:
+            print("Your command is not valid.")
+            continue
 
-        with open("todos.txt", "r") as file:
-            todos = file.readlines()
+    elif choice.startswith("complete"):
+        try:
+            number = int(choice[9:])
 
-        index = number - 1
-        todo_to_remove = todos[index].strip("\n")
-        todos.pop(index)
+            with open("todos.txt", "r") as file:
+                todos = file.readlines()
 
-        with open("todos.txt", "w", encoding="utf-8") as file:
-            file.writelines(todos)
+            index = number - 1
+            todo_to_remove = todos[index].strip("\n")
+            todos.pop(index)
 
-        print(f"Todo '{todo_to_remove}' was removed from the list.")
+            with open("todos.txt", "w", encoding="utf-8") as file:
+                file.writelines(todos)
 
-    elif "exit" in choice or "quit" in choice:
+            print(f"Todo '{todo_to_remove}' was removed from the list.")
+
+        except IndexError:
+            print("There is no item with that number.")
+            continue
+
+    elif choice.startswith("exit") or choice.startswith("quit"):
         print("Bye!")
         break
 
