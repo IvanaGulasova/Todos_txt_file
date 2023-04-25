@@ -4,5 +4,4 @@ buy a grocery
 bake bread
 learn to program
 clear the code
-buy a camera
-make soup
+make cake
