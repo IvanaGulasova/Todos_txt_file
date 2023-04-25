@@ -1,7 +1,6 @@
 make a breakfast
 do the laundry
 buy a grocery
-bake bread
 learn to program
 clear the code
 make cake

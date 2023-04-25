@@ -1,4 +1,4 @@
-def get_todos(filepath):
+def get_todos(filepath="todos.txt"):
     with open(filepath, "r") as file_local:
         todos_local = file_local.readlines()
     return todos_local
@@ -15,14 +15,14 @@ while True:
     if choice.startswith("add") or choice.startswith("new"):
         todo = choice[4:]
 
-        todos = get_todos("todos.txt")
+        todos = get_todos()
 
         todos.append(todo + "\n")
 
         write_todos("todos.txt", todos)
 
     elif choice.startswith("show"):
-        todos = get_todos("todos.txt")
+        todos = get_todos()
 
         for index, item in enumerate(todos, 1):
             item = item.strip("\n")
@@ -33,7 +33,7 @@ while True:
             number = int(choice[5:])
             number -= 1
 
-            todos = get_todos("todos.txt")
+            todos = get_todos()
 
             new_todos = input("Enter new todo: ")
             todos[number] = new_todos + "\n"
@@ -48,7 +48,7 @@ while True:
         try:
             number = int(choice[9:])
 
-            todos = get_todos("todos.txt")
+            todos = get_todos()
 
             index = number - 1
             todo_to_remove = todos[index].strip("\n")
