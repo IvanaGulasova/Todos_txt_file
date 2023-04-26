@@ -10,3 +10,4 @@ def write_todos(todos_arg ,filepath="todos.txt"):
     """ Write the to-do items list in the text line."""
     with open(filepath, "w", encoding="utf-8") as file:
         file.writelines(todos_arg)
+
